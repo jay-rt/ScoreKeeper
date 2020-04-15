@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:stretchColumns="*"
+    tools:context=".MainActivity">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/textViewHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_home"
+            android:textSize="40dp"
+            android:layout_margin="10dp"
+            android:layout_span="2"
+            android:gravity="center"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/textViewHomeScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/display_score"
+            android:textSize="80dp"
+            android:layout_margin="10dp"
+            android:layout_span="2"
+            android:gravity="end" />
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:id="@+id/decHomeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="@string/dec_score"
+            />
+
+        <Button
+            android:id="@+id/incHomeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="@string/inc_score"
+            />
+
+    </TableRow>
+
+    <TableRow>
+        <RadioGroup
+            android:id="@+id/scoreChange"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:padding="10dp"
+            android:checkedButton="@id/score2">
+            <RadioButton
+                android:id="@+id/score1"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change1"/>
+
+            <RadioButton
+                android:id="@+id/score2"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change2"/>
+
+            <RadioButton
+                android:id="@+id/score3"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change3"/>
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:id="@+id/decAwayButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="@string/dec_score"
+            />
+
+        <Button
+            android:id="@+id/incAwayButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="@string/inc_score"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/textViewAwayScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/display_score"
+            android:textSize="80dp"
+            android:layout_margin="10dp"
+            android:layout_span="2"
+            android:gravity="end" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/textViewAway"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_away"
+            android:textSize="40dp"
+            android:layout_margin="10dp"
+            android:layout_span="2"
+            android:gravity="center" />
+    </TableRow>
+
+</TableLayout>
