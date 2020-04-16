@@ -8,7 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="android:textColor">@color/textColor</item>
-        <item name="backgroundTint">@android:color/holo_red_light</item>
+<!--        <item name="backgroundTint">@android:color/holo_red_light</item>-->
+        <item name="backgroundTint">@color/backgroundTint</item>
+    </style>
+
+    <style name="textViewColor">
+        <item name="android:textColor">@color/textViewColor</item>
     </style>
 
 </resources>
