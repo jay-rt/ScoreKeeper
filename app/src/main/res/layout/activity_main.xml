@@ -65,21 +65,24 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change1"/>
+                android:text="@string/change1"
+                android:textColor="@color/textColor"/>
 
             <RadioButton
                 android:id="@+id/score2"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change2"/>
+                android:text="@string/change2"
+                android:textColor="@color/textColor"/>
 
             <RadioButton
                 android:id="@+id/score3"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change3"/>
+                android:text="@string/change3"
+                android:textColor="@color/textColor"/>
         </RadioGroup>
     </TableRow>
 
