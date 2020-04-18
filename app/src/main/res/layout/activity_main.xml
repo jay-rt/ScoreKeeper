@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:text="@string/display_score"
             android:textSize="80dp"
-            android:theme="@style/textViewColor"
             android:layout_margin="10dp"
             android:layout_span="2"
             android:gravity="end" />
@@ -112,7 +111,6 @@
             android:layout_height="wrap_content"
             android:text="@string/display_score"
             android:textSize="80dp"
-            android:theme="@style/textViewColor"
             android:layout_margin="10dp"
             android:layout_span="2"
             android:gravity="end" />
