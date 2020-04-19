@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioGroup scoreChange;
     private RadioButton score1, score2, score3;
     private int score = 0;
-//    private int homeScore =0, awayScore = 0;
+    private int homeScore = 0, awayScore = 0;
     private SharedPreferences savedValues;
-    private boolean isSaveChecked;
+    boolean isSaveChecked;
 
 
     @Override
@@ -52,27 +52,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isSaveChecked = savedValues.getBoolean("pref_save",false);
 
         if(isSaveChecked) {
-            String homeScore= savedValues.getString("HomeScore","");
-            String awayScore = savedValues.getString("AwayScore","");
-            score = savedValues.getInt("score",2);
-            textViewHomeScore.setText(homeScore);
-            textViewAwayScore.setText(awayScore);
+            homeScore= savedValues.getInt("HomeScore",0);
+            awayScore = savedValues.getInt("AwayScore",0);
+            score = savedValues.getInt("Score",2);
+//            display();
+            textViewHomeScore.setText(Integer.toString(homeScore));
+            textViewAwayScore.setText(Integer.toString(awayScore));
         }else{
             SharedPreferences.Editor editor = savedValues.edit();
-            editor.putString("HomeScore", textViewHomeScore.getText().toString());
-            editor.putString("AwayScore", textViewAwayScore.getText().toString());
-            editor.putInt("score", score);
+            editor.putInt("HomeScore", homeScore);
+            editor.putInt("AwayScore", awayScore);
+            editor.putInt("Score", score);
+            editor.putBoolean("pref_save",false);
             editor.apply();
         }
-////
-//        if (score == 1) {
-//            scoreChange.check(R.id.score1);
-//        } else if (score == 2) {
-//            scoreChange.check(R.id.score2);
-//        } else {
-//            scoreChange.check(R.id.score3);
-//        }
 
+        if(score == 1){
+            scoreChange.check(R.id.score1);
+        }else if(score == 2){
+            scoreChange.check(R.id.score2);
+        }else if(score == 3){
+            scoreChange.check(R.id.score3);
+        }
 
 //        savedValues = getSharedPreferences("saveValue", MODE_PRIVATE);
 //        PreferenceManager.setDefaultValues(this,R.xml.root_preferences, false);
@@ -118,12 +119,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            editor.putString("HomeScore",textViewHomeScore.toString());
 //            editor.putString("AwayScore",textViewAwayScore.toString());
 //            editor.putInt("score",score);
-//            editor.apply();
-//
 //        }else{
 //            editor.clear();
 //            savedValues.getBoolean("pref_save",false);
 //        }
+//        editor.apply();
 //        super.onPause();
 //    }
 //
@@ -147,18 +147,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-//        score = 0;
         switch (scoreChange.getCheckedRadioButtonId()){
             case R.id.score1:
-                score = Integer.parseInt(score1.getText().toString().replaceAll("[\\D]",""));
+//                score = Integer.parseInt(score1.getText().toString().replaceAll("[\\D]",""));
+                score = 1;
                 break;
             case R.id.score2:
-                score = Integer.parseInt(score2.getText().toString().replaceAll("[\\D]",""));
+                score = 2;
                 break;
             case R.id.score3:
-                score = Integer.parseInt(score3.getText().toString().replaceAll("[\\D]",""));
+                score = 3;
                 break;
         }
+
 
         switch (v.getId()){
             case R.id.decHomeButton:

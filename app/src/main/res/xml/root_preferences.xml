@@ -5,13 +5,4 @@
         android:title="@string/pref_save"
         android:summary="Saves all the data on screen"
         android:defaultValue="true"/>
-
-    <!--    <ListPreference-->
-    <!--        android:key="pref_rou"-->
-    <!--        android:title="@string/round"-->
-    <!--        android:summary="Set how app rounds"-->
-    <!--        android:dialogTitle="@string/round"-->
-    <!--        android:entries="@array/round_keys"-->
-    <!--        android:entryValues="@array/round_keys"-->
-    <!--        android:defaultValue="None"/>-->
 </PreferenceScreen>
