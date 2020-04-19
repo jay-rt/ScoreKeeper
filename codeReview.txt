@@ -1,0 +1,29 @@
+I compared my code with Gaurav and following were the differences that I observed between his and mine code.
+
+Layout:
+He used grid layout for his app while I went with table layout. In my opinion, both layouts are equally useful and is mostly based around user preference. He has also made 4 seperate layouts, 2 for landscape and 2 for portrait mode, which is a better practise than what I did where I had only one layout for portrait mode.
+
+Styles:
+I used themes to make the apperance of my app looks somewhat nicer while his was set to default. While nice looking apps are good when using in masses, for test purpose default look is also good.
+
+Code:
+1) MainActivity
+
+My class implements onClickListener which is a much better practise than what he did where he was simply assigning various onClickListener to different buttons.
+
+He didnt make any variable for radiobuttons while i had 3, which didnt affect the performance of the programme at all. As such i decided to comment them.
+
+There was 2 line of codes that allowed him to change the name of his team. I didnt have such features in my root_preferences.xml .
+
+I had onClickListener activated on 4 of my buttons but since he went with different approach, he didnt had any.
+
+He fucntion for checking was inside onCreate function while mine was inside onClick function.
+
+He also had 2 different code for adding and subtracting the value, while i used a single function to achieve this.
+
+2) root_preferences.xml
+
+I just had one checkbox that allowed me to save or not save the value, while he had several fuctionally added such as setting default score increasing value, changing team A and team B name and one button to save all of the datas.
+
+
+

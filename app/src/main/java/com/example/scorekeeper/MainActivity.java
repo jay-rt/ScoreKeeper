@@ -19,17 +19,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textViewHomeScore, textViewAwayScore;
     private Button decHomeButton, incHomeButton, decAwayButton, incAwayButton;
     private RadioGroup scoreChange;
-    private RadioButton score1, score2, score3;
+//    private RadioButton score1, score2, score3;
     private int score = 0;
     private int homeScore = 0, awayScore = 0;
     private SharedPreferences savedValues;
-    boolean isSaveChecked;
+    private boolean isSaveChecked;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        savedValues = getSharedPreferences("saveValue", MODE_PRIVATE);
+        savedValues = PreferenceManager.getDefaultSharedPreferences(this);
 
         textViewHomeScore = findViewById(R.id.textViewHomeScore);
         textViewAwayScore = findViewById(R.id.textViewAwayScore);
@@ -38,32 +41,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         decAwayButton = findViewById(R.id.decAwayButton);
         incAwayButton = findViewById(R.id.incAwayButton);
         scoreChange = findViewById(R.id.scoreChange);
-        score1 = findViewById(R.id.score1);
-        score2 = findViewById(R.id.score2);
-        score3 = findViewById(R.id.score3);
+//        score1 = findViewById(R.id.score1);
+//        score2 = findViewById(R.id.score2);
+//        score3 = findViewById(R.id.score3);
 
         decHomeButton.setOnClickListener(this);
         incHomeButton.setOnClickListener(this);
         decAwayButton.setOnClickListener(this);
         incAwayButton.setOnClickListener(this);
-//
-//        savedValues = getSharedPreferences("saveValue", MODE_PRIVATE);
-        savedValues = PreferenceManager.getDefaultSharedPreferences(this);
+
         isSaveChecked = savedValues.getBoolean("pref_save",false);
 
         if(isSaveChecked) {
             homeScore= savedValues.getInt("HomeScore",0);
             awayScore = savedValues.getInt("AwayScore",0);
             score = savedValues.getInt("Score",2);
-//            display();
-            textViewHomeScore.setText(Integer.toString(homeScore));
-            textViewAwayScore.setText(Integer.toString(awayScore));
+            display();
+//            textViewHomeScore.setText(Integer.toString(homeScore));
+//            textViewAwayScore.setText(Integer.toString(awayScore));
         }else{
             SharedPreferences.Editor editor = savedValues.edit();
-            editor.putInt("HomeScore", homeScore);
-            editor.putInt("AwayScore", awayScore);
-            editor.putInt("Score", score);
-            editor.putBoolean("pref_save",false);
+//            homeScore = Integer.parseInt(textViewHomeScore.getText().toString());
+//            awayScore = Integer.parseInt(textViewAwayScore.getText().toString());
+            editor.putInt("HomeScore", 0);
+            editor.putInt("AwayScore", 0);
+            editor.putInt("Score", 2);
+            editor.putBoolean("pref_save",savedValues.getBoolean("pref_save",false));
             editor.apply();
         }
 
@@ -74,10 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(score == 3){
             scoreChange.check(R.id.score3);
         }
-
-//        savedValues = getSharedPreferences("saveValue", MODE_PRIVATE);
-//        PreferenceManager.setDefaultValues(this,R.xml.root_preferences, false);
-//        isSaveChecked = PreferenceManager.getDefaultSharedPreferences(this);
 
     }
 
@@ -104,46 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-
-
-//    public void save(View view){
-//        SharedPreferences savedValues = getSharedPreferences("title", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = savedValues.edit();
-//    }
-
-//    public void onPause(){
-//        SharedPreferences.Editor editor = savedValues.edit();
-//
-//        if(isSaveChecked.getBoolean("pref_save",false)){
-//
-//            editor.putString("HomeScore",textViewHomeScore.toString());
-//            editor.putString("AwayScore",textViewAwayScore.toString());
-//            editor.putInt("score",score);
-//        }else{
-//            editor.clear();
-//            savedValues.getBoolean("pref_save",false);
-//        }
-//        editor.apply();
-//        super.onPause();
-//    }
-//
-//    public void onResume(){
-//        super.onResume();
-//        if(savedValues.getBoolean("pref_save",false)){
-//            textViewHomeScore.setText(savedValues.getString("HomeScore",""));
-//            textViewAwayScore.setText(savedValues.getString("AwayScore",""));
-//            score = savedValues.getInt("score",0);
-//
-//            if(score == 1){
-//                scoreChange.check(R.id.score1);
-//            }else if(score == 2){
-//                scoreChange.check(R.id.score2);
-//            }else{
-//                scoreChange.check(R.id.score3);
-//            }
-//        }
-//    }
-
     @Override
     public void onClick(View v) {
 
@@ -151,59 +110,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.score1:
 //                score = Integer.parseInt(score1.getText().toString().replaceAll("[\\D]",""));
                 score = 1;
+                scoreChangeSave(score);
                 break;
             case R.id.score2:
                 score = 2;
+                scoreChangeSave(score);
                 break;
             case R.id.score3:
                 score = 3;
+                scoreChangeSave(score);
                 break;
         }
-
 
         switch (v.getId()){
             case R.id.decHomeButton:
-                textViewHomeScore.setText(Integer.toString(Integer.parseInt(textViewHomeScore.getText().toString())-score));
+                homeScore = Integer.parseInt(textViewHomeScore.getText().toString())-score;
+                scoreSave("Home",homeScore);
                 break;
 
             case R.id.incHomeButton:
-                textViewHomeScore.setText(Integer.toString(Integer.parseInt(textViewHomeScore.getText().toString())+score));
+                homeScore = Integer.parseInt(textViewHomeScore.getText().toString())+score;
+                scoreSave("Home",homeScore);
                 break;
 
             case R.id.decAwayButton:
-                textViewAwayScore.setText(Integer.toString(Integer.parseInt(textViewAwayScore.getText().toString())-score));
+                awayScore = Integer.parseInt(textViewAwayScore.getText().toString())-score;
+                scoreSave("Away",awayScore);
                 break;
 
             case R.id.incAwayButton:
-                textViewAwayScore.setText(Integer.toString(Integer.parseInt(textViewAwayScore.getText().toString())+score));
-        }
+                awayScore = Integer.parseInt(textViewAwayScore.getText().toString())+score;
+                scoreSave("Away",awayScore);
+                break;
+            }
+            display();
 
-//        switch (v.getId()){
-//            case R.id.decHomeButton:
-//                homeScore = Integer.parseInt(textViewHomeScore.getText().toString())-score;
-//                display();
-//                break;
-//
-//            case R.id.incHomeButton:
-//                homeScore = Integer.parseInt(textViewHomeScore.getText().toString())+score;
-//                display();
-//                break;
-//
-//            case R.id.decAwayButton:
-//                awayScore = Integer.parseInt(textViewAwayScore.getText().toString())-score;
-//                display();
-//                break;
-//
-//            case R.id.incAwayButton:
-//                awayScore = Integer.parseInt(textViewAwayScore.getText().toString())+score;
-//                display();
-//                break;
-//        }
 
     }
 
-//    public void display(){
-//        textViewHomeScore.setText(Integer.toString(homeScore));
-//        textViewAwayScore.setText(Integer.toString(awayScore));
-//    }
+    public void scoreChangeSave(int score){
+        if (isSaveChecked){
+            SharedPreferences.Editor editor = savedValues.edit();
+            editor.putInt("Score", score);
+            editor.apply();
+        }
+    }
+
+    public void scoreSave(String team, int score){
+        if (isSaveChecked){
+            SharedPreferences.Editor editor = savedValues.edit();
+            if (team == "Home"){
+                editor.putInt("HomeScore",score);
+            } else {
+                editor.putInt("AwayScore",score);
+            }
+            editor.apply();
+        }
+    }
+
+    public void display(){
+        textViewHomeScore.setText(Integer.toString(homeScore));
+        textViewAwayScore.setText(Integer.toString(awayScore));
+    }
 }
